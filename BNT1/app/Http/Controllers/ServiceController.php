@@ -22,13 +22,14 @@ class ServiceController extends Controller
   public function buscar(Request $datos)
   {
     $service = [];
-      if($datos->input('buscar')){
-          $service = Service::Where("title", "LIKE", "%".$datos->input('buscar')."%")->get();
+
+    if($datos->input('title')){
+        $service = Service::where('title', 'like', '%' . $datos->input('title') . '%')->get();
       }
 
-  $vac= compact("service");
+    // $vac= compact('service');
 
-  return view("/search", $vac);
+    return view('/search', compact('service'));
 
   }
 
