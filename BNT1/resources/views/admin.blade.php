@@ -50,7 +50,9 @@
       @endunless
     <!--si no hay servicios-->
     @empty
+      <td>
       <p>No hay servicios disponibles</p>
+      </td>
     @endforelse
   </table>
 

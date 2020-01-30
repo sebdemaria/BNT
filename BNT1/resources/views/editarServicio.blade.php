@@ -44,7 +44,13 @@
   </div>
 
   <div class="">
-    <input type="submit" name="" value="Actualizar Servicio">
+    <a href="/admin" class="button btn btn-outline-primary">
+      Cancelar
+    </a>
+  </div>
+
+  <div class="">
+    <input type="submit" name="" class="button btn btn-outline-primary" value="Actualizar Servicio">
   </div>
 </form>
 

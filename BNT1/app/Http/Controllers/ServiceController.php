@@ -6,13 +6,24 @@ use Illuminate\Http\Request;
 use App\Service;
 use Auth;
 class ServiceController extends Controller
+
 {
+//funcion para impresion de listado de servicios
+  public function listadoPublico(){
+
+    $services = Service::all();
+
+    $vac = compact("services");
+
+    return view("/search", $vac);
+  }
+
 //funcion para impresion de listado de servicios
   public function listado(){
     $usuarioLog = Auth::user();
 
     if($usuarioLog == null){
-      return redirect('/');
+      return redirect('/search');
     }
 
     $services = Service::all();
@@ -86,7 +97,7 @@ class ServiceController extends Controller
       $services->active = $data['active'];
     }
     $services->save();
-    return view('admin',compact('services'));
+    return redirect('/admin');
   }
 
 //funcion buscador
