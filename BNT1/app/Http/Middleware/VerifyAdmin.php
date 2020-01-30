@@ -22,7 +22,7 @@ class VerifyAdmin
    }
    //dd($isAdmin);
    if ($isAdmin == 0) {
-     return redirect('/');
+     return redirect('/search');
    }
    return $next($request);
   }

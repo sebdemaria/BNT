@@ -10,8 +10,8 @@ class ServiceController extends Controller
 {
 //funcion para impresion de listado de servicios
   public function listadoPublico(){
-
-    $services = Service::all();
+//si el servicio no esta activo no se muestra
+    $services = Service::Where('active', '=', '1')->get();
 
     $vac = compact("services");
 
@@ -96,36 +96,21 @@ class ServiceController extends Controller
       $services->description = $data['description'];
       $services->active = $data['active'];
     }
+
     $services->save();
+
     return redirect('/admin');
   }
 
-//funcion buscador
-  // public function search(Request $req)
-  //   {
-  //       $services = Service::all();
-  //       //coloco las movies como vacias para solo usar el filtro
-  //       $movies = [];
-  //       //si hay el filtro de genero entoces empiezo a filtrar por ese;
-  //       if ($req->input('genre_id')) {
-  //           $movies = Movie::where('genre_id', '=', $req->input('genre_id'));
-  //       }
-  //       //si envie el input del titulo entonces lo filtro
-  //       if ($req->input('title')) {
-  //           //si ya estaba el filtro de genero, le agrego el filtro de titulo
-  //           if ($movies) {
-  //               $movies->where('title', 'like', '%' . $req->input('title') . '%');
-  //           } else {
-  //               //sino solo filtro por el titulo
-  //               $movies = Movie::where('title', 'like', '%' . $req->input('title') . '%');
-  //           }
-  //       }
-  //       //si hay filtro entonces obtengo los datos con el metodo get
-  //       if ($movies) {
-  //           $movies = $movies->get();
-  //       }
-  //
-  //       return view('movies/search', compact(['genres', 'movies']));
-  //   }
+  public function buscar(Request $datos)
+  {
+      if($datos->get('buscar')){
+          $service = Service::Where("title", "LIKE", "%".$datos->title."%")->get();
+      }
+
+      $vac= compact("service");
+
+      return view("/search", $vac);
+  }
 
 }

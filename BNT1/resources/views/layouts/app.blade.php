@@ -42,8 +42,9 @@
                     </ul>
 
                 <!--buscador-->
-                <form id="buscador" class="form-inline" action="index.html" method="post">
-                <input id="search" class="form-control mr-sm-2" type="search" placeholder="Buscar Servicio..." aria-label="Search">
+                <form id="buscador" class="form-inline" action="/search" method="get">
+                  {{csrf_field()}}
+                <input id="search" name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar Servicio..." aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
 
@@ -69,13 +70,13 @@
                                     <a class="dropdown-item" href="admin">
                                         {{ __('Mi cuenta') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="/logout"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="/logout" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>
