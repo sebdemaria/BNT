@@ -8,15 +8,6 @@ use Auth;
 class ServiceController extends Controller
 
 {
-//funcion para impresion de listado de servicios
-  public function listadoPublico(){
-//si el servicio no esta activo no se muestra
-    $services = Service::Where('active', '=', '1')->get();
-
-    $vac = compact("services");
-
-    return view("/search", $vac);
-  }
 
 //funcion para busqueda de servicio por titulo
   public function buscar(Request $datos)
@@ -30,7 +21,16 @@ class ServiceController extends Controller
     // $vac= compact('service');
 
     return view('/search', compact('service'));
+  }
 
+//funcion para impresion de listado de servicios
+  public function listadoPublico(){
+//si el servicio no esta activo no se muestra
+    $services = Service::Where('active', '=', '1')->get();
+
+    $vac = compact("services");
+
+    return view("/search", $vac);
   }
 
 //funcion para impresion de listado de servicios para admin

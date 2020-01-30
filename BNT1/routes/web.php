@@ -1,7 +1,7 @@
 <?php
 
 //buscador y listado publico
-Route::get('/search', "ServiceController@buscar");
+Route::post('/search', "ServiceController@buscar");
 Route::get('/search', "ServiceController@listadoPublico");
 
 // Route::get('/', 'ServiceController@search');

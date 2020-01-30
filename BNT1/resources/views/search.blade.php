@@ -8,7 +8,7 @@
 @section('main')
 
   <!--buscador-->
-  <form id="buscador" class="form-inline" action="" method="get">
+  <form id="buscador" class="form-inline" action="" method="post">
     {{csrf_field()}}
   <input id="search" name="title" class="form-control mr-sm-2" type="text" placeholder="Buscar Servicio..." aria-label="Search">
   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
