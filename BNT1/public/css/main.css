@@ -1,0 +1,56 @@
+*{
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: black;
+  font-family: 'Quicksand', sans-serif;
+}
+
+#navbarDropdown{
+  color: grey;
+  margin-left: 15px;
+}
+
+body{
+  background-color: whitesmoke;
+}
+
+.regServ{
+  width: 100%;
+  text-align: center;
+}
+
+.titulo{
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
+}
+
+#buscador{
+  width: 40%;
+  display: inline-flex;
+  justify-content: center;
+}
+
+#search{
+  display: inline-flex;
+  width: 70%;
+}
+
+.formulario{
+  width: 15%;
+}
+
+#buttons{
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.log{
+  width: 30%;
+  color: grey;
+}
