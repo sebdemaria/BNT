@@ -18,7 +18,21 @@ class ServiceController extends Controller
     return view("/search", $vac);
   }
 
-//funcion para impresion de listado de servicios
+//funcion para busqueda de servicio por titulo
+  public function buscar(Request $datos)
+  {
+    $service = [];
+      if($datos->input('buscar')){
+          $service = Service::Where("title", "LIKE", "%".$datos->input('buscar')."%")->get();
+      }
+
+  $vac= compact("service");
+
+  return view("/search", $vac);
+
+  }
+
+//funcion para impresion de listado de servicios para admin
   public function listado(){
     $usuarioLog = Auth::user();
 
@@ -101,16 +115,4 @@ class ServiceController extends Controller
 
     return redirect('/admin');
   }
-
-  public function buscar(Request $datos)
-  {
-      if($datos->get('buscar')){
-          $service = Service::Where("title", "LIKE", "%".$datos->title."%")->get();
-      }
-
-      $vac= compact("service");
-
-      return view("/search", $vac);
-  }
-
 }
