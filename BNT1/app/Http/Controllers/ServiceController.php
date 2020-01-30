@@ -15,7 +15,15 @@ class ServiceController extends Controller
     $service = [];
 
     if($datos->input('title')){
-        $service = Service::where('title', 'like', '%' . $datos->input('title') . '%')->get();
+        $service = Service::where('title', 'like', '%' . $datos->input('title') . '%');
+      }
+
+    if ($service) {
+        $service->Where('active', '=', '1');
+          }
+
+      if ($service) {
+          $service = $service->get();
       }
 
     // $vac= compact('service');

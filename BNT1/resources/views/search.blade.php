@@ -15,9 +15,9 @@
   </form>
 
   @if (isset($service))
-    @php
+    {{-- @php
       dd($service);
-    @endphp
+    @endphp --}}
     <div class="panel panel-success">
         <div class="panel-heading">Resultado de la busqueda</div>
         <div class="panel-body">
@@ -31,7 +31,7 @@
           </tr>
         </thead>
         <!--recorrido e impresion de cada servicio-->
-        @forelse ($services as $service)
+        @forelse ($service as $service)
             <tbody>
               <tr>
                 <th scope="row">{{$service->id}}</th>
