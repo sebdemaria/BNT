@@ -16,6 +16,12 @@
   width: 43%;
 }
 
+#demo{
+  width: 100%;
+  color: black;
+  background-color: green;
+}
+
 #select{
   margin-right: 7px;
   height: 37px;

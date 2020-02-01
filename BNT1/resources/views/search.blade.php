@@ -3,7 +3,6 @@
 <!-- HEAD -->
 @section('head')
   <link rel="stylesheet" href="/css/search.css">
-  <script src="jquery-2.1.4.js"></script>
 @endsection
 
 <!--MAIN-->
@@ -16,25 +15,50 @@
       <input id="search" name="title" class="form-control mr-sm-2" type="text" placeholder="Buscar Servicio..." aria-label="Search">
     </div>
     <div class="filtros">
-      <input id="latitude" name="latitude" class="form-control mr-sm-2" type="text" placeholder="Mi latitud" aria-label="Search">
-      <input id="longitude" name="longitude" class="form-control mr-sm-2" type="text" placeholder="Mi longitud" aria-label="Search">
-      <button id="location-button" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar mis coordenadas</button>
+      <input id="latitude" value="" name="latitude" class="form-control mr-sm-2" type="text" placeholder="Mi latitud" aria-label="Search">
+      <input id="longitude" value="" name="longitude" class="form-control mr-sm-2" type="text" placeholder="Mi longitud" aria-label="Search">
+      <button onclick="getLocation()" class="btn btn-outline-primary my-2 my-sm-0">Buscar mis coordenadas</button>
+
+      {{-- <script>
+        var x = document.getElementById("demo");
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+
+        function showPosition(position) {
+          x.innerHTML = "Latitude: " + position.coords.latitude +
+          "<br>Longitude: " + position.coords.longitude;
+        }
+      </script> --}}
       <script>
-        $('#location-button').click(function(){
-          if (navigator.geolocation) { //check if geolocation is available
-                    navigator.geolocation.getCurrentPosition(function(position){
-                      console.log(position);
-                    });
-                  }
-                });
-        // $('#location-button').click(function(){
-        //   if(navigator.geolocation)
-        //     navigation.geolocation.getCurrentPosition(function(position){
-        //       console.log(position);
-        //     });
-        //   else
-        //     console.log("geolocation is not supported");
-        //   });
+      if ("geolocation" in navigator) {
+        /* la geolocalización está disponible */
+        function success(Position) {
+          var crd = Position.coords;
+          var latitude = crd.latitude;
+          var longitude = crd.longitude;
+
+          console.log('Your current position is:');
+          console.log('Latitude : ' + latitude);
+          console.log('Longitude: ' + longitude);
+          console.log('More or less ' + crd.accuracy + ' meters.');
+
+          document.getElementById('latitude').value = crd.latitude;
+
+          document.getElementById('longitude').value = crd.longitude;
+        };
+
+        navigator.geolocation.getCurrentPosition(success);
+
+        } else {
+        /* la geolocalización NO está disponible */
+        console.log('la geolocalización no se encuentra disponible')
+        }
+
       </script>
     </div>
     <div class="filtros">
