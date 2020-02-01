@@ -1,0 +1,30 @@
+h1{
+  margin-bottom: 15px;
+}
+
+.datos{
+  width: 100%;
+  margin-top: 15px;
+}
+
+.texto{
+  border-radius: 2%;
+  border: solid 1px lightgrey;
+  box-shadow: none;
+}
+
+#descrip{
+  width: 35%;
+  height: 100px;
+}
+
+.check{
+  margin-top: 15px;
+}
+
+.boton{
+  margin-top: 20px;
+  width: 10%;
+  display: inline-flex;
+  justify-content: center;
+}

@@ -1,0 +1,58 @@
+#buscador{
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.insert{
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+#search{
+  display: inline-flex;
+  width: 43%;
+}
+
+#select{
+  margin-right: 7px;
+  height: 37px;
+}
+
+.filtros{
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.submit{
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+}
+
+#resultado{
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 45px;
+  margin-bottom: 10px;
+}
+
+.panel-heading{
+  font-size: 30px;
+}
+
+#tabla{
+  width: 100%;
+  text-align: center;
+}
+
+.none{
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+}

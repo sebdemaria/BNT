@@ -17,7 +17,7 @@ class ServiceController extends Controller
     if($datos->input('title')){
         $service = Service::where('title', 'like', '%' . $datos->input('title') . '%');
       }
-
+//si el servicio no esta activo no se muestra
     if ($service) {
         $service->Where('active', '=', '1');
           }
@@ -31,15 +31,15 @@ class ServiceController extends Controller
     return view('/search', compact('service'));
   }
 
-//funcion para impresion de listado de servicios
-  public function listadoPublico(){
-//si el servicio no esta activo no se muestra
-    $services = Service::Where('active', '=', '1')->get();
-
-    $vac = compact("services");
-
-    return view("/search", $vac);
-  }
+// //funcion para impresion de listado de servicios
+//   public function listadoPublico(){
+// //si el servicio no esta activo no se muestra
+//     $services = Service::Where('active', '=', '1')->get();
+//
+//     $vac = compact("services");
+//
+//     return view("/search", $vac);
+//   }
 
 //funcion para impresion de listado de servicios para admin
   public function listado(){
@@ -62,12 +62,15 @@ class ServiceController extends Controller
     $reglas = [
       "title" => "string|min:3|max:25|required",
       "description" => "string|min:5|required",
+      "latitude" => ['required', 'regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],
+      "longitude" => ['required', 'regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],
     ];
 
     $mensajes = [
       "string" => "El campo :attribute debe ser un texto",
       "min" => "El campo :attribute debe tener mínimo :min caractéres",
       "max" => "El campo :attribute debe tener un máximo de :max",
+      "decimal" => "El campo :attribute tiene un formato erróneo"
     ];
 
     $this->validate($req, $reglas, $mensajes);
@@ -76,6 +79,8 @@ class ServiceController extends Controller
 
     $servicioNuevo->title = $req["title"];
     $servicioNuevo->description = $req["description"];
+    $servicioNuevo->latitude = $req["latitude"];
+    $servicioNuevo->longitude = $req["longitude"];
     $servicioNuevo->active = $req["active"];
 
     // dd($servicioNuevo);
@@ -110,13 +115,17 @@ class ServiceController extends Controller
     $this->validate($data, [
       'title' => ['string', 'min:3'],
       'description'=> ['string', 'min:5'],
-      'active' => ['boolean']
+      'active' => ['boolean'],
+      'latitude' => ['required', 'regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],
+      'longitude' => ['required', 'regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],
     ]);
 
     $services = Service::find($id);
     if(Service::find($services->id)) {
       $services->title = $data['title'];
       $services->description = $data['description'];
+      $services->latitude = $data['latitude'];
+      $services->longitude = $data['longitude'];
       $services->active = $data['active'];
     }
 

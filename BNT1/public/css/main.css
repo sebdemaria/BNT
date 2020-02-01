@@ -8,13 +8,25 @@
   font-family: 'Quicksand', sans-serif;
 }
 
+h1{
+  margin-left: 40px;
+  margin-bottom: 40px;
+  margin-right: 40px;
+  margin-top: 20px;
+}
+
 #navbarDropdown{
   color: grey;
   margin-left: 15px;
 }
 
+main{
+  height: 100%;
+}
+
 body{
   background-color: whitesmoke;
+  height: 100%;
 }
 
 .regServ{
@@ -27,17 +39,6 @@ body{
   display: inline-flex;
   justify-content: center;
   align-content: center;
-}
-
-#buscador{
-  width: 40%;
-  display: inline-flex;
-  justify-content: center;
-}
-
-#search{
-  display: inline-flex;
-  width: 70%;
 }
 
 .formulario{

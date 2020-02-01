@@ -21,13 +21,14 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/app2.css">
     @yield('head')
 </head>
 
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div id="logo" class="container">
                 <a class="navbar-brand" href="/search">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -42,7 +43,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul id="botones" class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -59,7 +60,7 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="admin">
+                                    <a class="dropdown-item" href="/admin">
                                       @if(Auth::check() && Auth::user()->isAdmin)
                                         {{ __('Mi cuenta') }}
                                       @endif
