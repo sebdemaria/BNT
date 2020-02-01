@@ -12,19 +12,44 @@ class ServiceController extends Controller
 //funcion para busqueda de servicio por titulo
   public function buscar(Request $datos)
   {
+    $latitud = $datos->input('latitude');
+    $longitud = $datos->input('longitude');
+    $distancia = $datos->input('distancia');
     $service = [];
 
     if($datos->input('title')){
         $service = Service::where('title', 'like', '%' . $datos->input('title') . '%');
       }
-//si el servicio no esta activo no se muestra
-    if ($service) {
-        $service->Where('active', '=', '1');
-          }
 
-      if ($service) {
-          $service = $service->get();
-      }
+    //si el servicio no esta activo no se muestra
+    // if ($service) {
+    //       $service->selectRaw('( 3959 * acos( cos( radians(?) ) *
+    //                        cos( radians( latitude ) )
+    //                        * cos( radians( longitude ) - radians(?)
+    //                        ) + sin( radians(?) ) *
+    //                        sin( radians( latitude ) ) )
+    //                      ) AS distance', [$latitud, $longitud, $latitud])
+    //       ->havingRaw("distance < ?", [$distancia]);
+    //     }
+    // else {
+    //   $service = Service::select('services.*')
+    //     ->selectRaw('( 3959 * acos( cos( radians(?) ) *
+    //                        cos( radians( latitude ) )
+    //                        * cos( radians( longitude ) - radians(?)
+    //                        ) + sin( radians(?) ) *
+    //                        sin( radians( latitude ) ) )
+    //                      ) AS distance', [$latitud, $longitud, $latitud])
+    //     ->havingRaw("distance < ?", [$distancia])
+    //     ->orderBy('distance', 'asc');
+    //   }
+
+    if ($service) {
+      $service->Where('active', '=', '1');
+    }
+
+    if ($service) {
+        $service = $service->get();
+    }
 
     // $vac= compact('service');
 

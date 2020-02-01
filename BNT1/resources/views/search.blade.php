@@ -15,8 +15,8 @@
       <input id="search" name="title" class="form-control mr-sm-2" type="text" placeholder="Buscar Servicio..." aria-label="Search">
     </div>
     <div class="filtros">
-      <input id="latitude" value="" name="latitude" class="form-control mr-sm-2" type="text" placeholder="Mi latitud" aria-label="Search">
-      <input id="longitude" value="" name="longitude" class="form-control mr-sm-2" type="text" placeholder="Mi longitud" aria-label="Search">
+      <input id="latitude" value="" name="latitude" class="form-control mr-sm-2" type="text" placeholder="Mi latitud" aria-label="Search" readonly>
+      <input id="longitude" value="" name="longitude" class="form-control mr-sm-2" type="text" placeholder="Mi longitud" aria-label="Search" readonly>
       <button onclick="getLocation()" class="btn btn-outline-primary my-2 my-sm-0">Buscar mis coordenadas</button>
 
       {{-- <script>
@@ -34,6 +34,8 @@
           "<br>Longitude: " + position.coords.longitude;
         }
       </script> --}}
+
+      {{-- obtención de localización de usuario --}}
       <script>
       if ("geolocation" in navigator) {
         /* la geolocalización está disponible */
@@ -47,6 +49,7 @@
           console.log('Longitude: ' + longitude);
           console.log('More or less ' + crd.accuracy + ' meters.');
 
+          //reemplazo de datos de latitud y longitud automaticamente en value del input
           document.getElementById('latitude').value = crd.latitude;
 
           document.getElementById('longitude').value = crd.longitude;
@@ -76,9 +79,9 @@
   </form>
 
   @if ($service)
-    {{-- @php
+    @php
       dd($service);
-    @endphp --}}
+    @endphp
     <div id="resultado" class="panel panel-success">
         <div class="panel-heading">Resultado de la busqueda</div>
     </div>
