@@ -14,35 +14,38 @@ class ServiceController extends Controller
   {
     $latitud = $datos->input('latitude');
     $longitud = $datos->input('longitude');
-    $distancia = $datos->input('distancia');
+    $distancia = $datos->input('distance');
     $service = [];
+
 
     if($datos->input('title')){
         $service = Service::where('title', 'like', '%' . $datos->input('title') . '%');
       }
+// dd($longitud, $distancia);
+    if ($service) {
+          Service::select('services.*')
+          ->selectRaw('( 3959 * acos( cos( radians(?) ) *
+                           cos( radians( latitude ) )
+                           * cos( radians( longitude ) - radians(?)
+                           ) + sin( radians(?) ) *
+                           sin( radians( latitude ) ) )
+                         ) AS distance', [$latitud, $longitud, $latitud])
+          ->havingRaw("distance < ?", [$distancia])
+          ->orderBy('distance', 'asc');
+        }
+    else {
+      $service = Service::select('services.*')
+        ->selectRaw('( 3959 * acos( cos( radians(?) ) *
+                           cos( radians( latitude ) )
+                           * cos( radians( longitude ) - radians(?)
+                           ) + sin( radians(?) ) *
+                           sin( radians( latitude ) ) )
+                         ) AS distance', [$latitud, $longitud, $latitud])
+        ->havingRaw("distance < ?", [$distancia])
+        ->orderBy('distance', 'asc');
+      }
 
     //si el servicio no esta activo no se muestra
-    // if ($service) {
-    //       $service->selectRaw('( 3959 * acos( cos( radians(?) ) *
-    //                        cos( radians( latitude ) )
-    //                        * cos( radians( longitude ) - radians(?)
-    //                        ) + sin( radians(?) ) *
-    //                        sin( radians( latitude ) ) )
-    //                      ) AS distance', [$latitud, $longitud, $latitud])
-    //       ->havingRaw("distance < ?", [$distancia]);
-    //     }
-    // else {
-    //   $service = Service::select('services.*')
-    //     ->selectRaw('( 3959 * acos( cos( radians(?) ) *
-    //                        cos( radians( latitude ) )
-    //                        * cos( radians( longitude ) - radians(?)
-    //                        ) + sin( radians(?) ) *
-    //                        sin( radians( latitude ) ) )
-    //                      ) AS distance', [$latitud, $longitud, $latitud])
-    //     ->havingRaw("distance < ?", [$distancia])
-    //     ->orderBy('distance', 'asc');
-    //   }
-
     if ($service) {
       $service->Where('active', '=', '1');
     }

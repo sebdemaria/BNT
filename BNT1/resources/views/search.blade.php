@@ -65,12 +65,12 @@
       </script>
     </div>
     <div class="filtros">
-      <select id="select" class="btn btn-primary dropdown-toggle" name="distance" form="distance">
+      <select id="select" class="btn btn-primary dropdown-toggle" name="distance">
         <option value="null" selected>Distancia al servicio</option>
         <option value="2">2km</option>
         <option value="10">10km</option>
         <option value="100">100km</option>
-        <option value="anywhere">Anywhere</option>
+        <option value="10000000">Anywhere</option>
       </select>
     </div>
     <div class="submit">
@@ -79,9 +79,9 @@
   </form>
 
   @if ($service)
-    @php
+    {{-- @php
       dd($service);
-    @endphp
+    @endphp --}}
     <div id="resultado" class="panel panel-success">
         <div class="panel-heading">Resultado de la busqueda</div>
     </div>
