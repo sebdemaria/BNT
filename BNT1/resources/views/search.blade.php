@@ -12,11 +12,16 @@
   <form id="buscador" class="form-inline" action="" method="get">
     {{csrf_field()}}
     <div class="insert">
+
       <input id="search" name="title" class="form-control mr-sm-2" type="text" placeholder="Buscar Servicio..." aria-label="Search">
+      
     </div>
+
     <div class="filtros">
+
       <input id="latitude" value="" name="latitude" class="form-control mr-sm-2" type="text" placeholder="Mi latitud" aria-label="Search" readonly>
       <input id="longitude" value="" name="longitude" class="form-control mr-sm-2" type="text" placeholder="Mi longitud" aria-label="Search" readonly>
+
       <button onclick="getLocation()" class="btn btn-outline-primary my-2 my-sm-0">Buscar mis coordenadas</button>
 
       {{-- <script>
@@ -51,7 +56,6 @@
 
           //reemplazo de datos de latitud y longitud automaticamente en value del input
           document.getElementById('latitude').value = crd.latitude;
-
           document.getElementById('longitude').value = crd.longitude;
         };
 
@@ -64,6 +68,7 @@
 
       </script>
     </div>
+
     <div class="filtros">
       <select id="select" class="btn btn-primary dropdown-toggle" name="distance">
         <option value="null" selected>Distancia al servicio</option>
@@ -73,9 +78,11 @@
         <option value="10000000">Anywhere</option>
       </select>
     </div>
+
     <div class="submit">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
     </div>
+
   </form>
 
   @if ($service)
@@ -107,7 +114,7 @@
         @empty
           <tr>
           <div class="none">
-            <p>No hay servicios disponibles</p>
+            <p>No hay servicios que coincidan con los datos ingresados</p>
           </div>
           </tr>
       @endforelse

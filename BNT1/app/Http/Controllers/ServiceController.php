@@ -17,35 +17,32 @@ class ServiceController extends Controller
     $distancia = $datos->input('distance');
     $service = [];
 
-
-    if($datos->input('title')){
-        $service = Service::where('title', 'like', '%' . $datos->input('title') . '%');
-      }
-// dd($longitud, $distancia);
-    if ($service) {
-          Service::select('services.*')
-          ->selectRaw('( 3959 * acos( cos( radians(?) ) *
-                           cos( radians( latitude ) )
-                           * cos( radians( longitude ) - radians(?)
-                           ) + sin( radians(?) ) *
-                           sin( radians( latitude ) ) )
-                         ) AS distance', [$latitud, $longitud, $latitud])
-          ->havingRaw("distance < ?", [$distancia])
-          ->orderBy('distance', 'asc');
-        }
-    else {
-      $service = Service::select('services.*')
+//si hubo un filtro de distancia
+    if($datos->input('distance') !== null){
+        $service = Service::select('services.*')
         ->selectRaw('( 3959 * acos( cos( radians(?) ) *
-                           cos( radians( latitude ) )
-                           * cos( radians( longitude ) - radians(?)
-                           ) + sin( radians(?) ) *
-                           sin( radians( latitude ) ) )
-                         ) AS distance', [$latitud, $longitud, $latitud])
+                         cos( radians( latitude ) )
+                         * cos( radians( longitude ) - radians(?)
+                         ) + sin( radians(?) ) *
+                         sin( radians( latitude ) ) )
+                       ) AS distance', [$latitud, $longitud, $latitud])
         ->havingRaw("distance < ?", [$distancia])
         ->orderBy('distance', 'asc');
       }
+// dd($longitud, $distancia);
 
-    //si el servicio no esta activo no se muestra
+//si hubo filtro por titulo y existe $service
+    if ($datos->input('title')) {
+      if (!isset($service)) {
+            $service->where('title', 'like', '%' . $datos->input('title') . '%');
+          }
+//si no existe $service (no se filtro por titulo)
+      else {
+        $service = Service::where('title', 'like', '%' . $datos->input('title') . '%');
+        }
+    }
+
+//si el servicio no esta activo no se muestra
     if ($service) {
       $service->Where('active', '=', '1');
     }
